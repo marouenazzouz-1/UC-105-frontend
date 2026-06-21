@@ -26,6 +26,7 @@ def _get_user_id() -> str:
             return aad_user
     except AttributeError:
         pass
+    return "anonymous"
 
 ### page layout
 st.set_page_config(
