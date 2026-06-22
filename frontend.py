@@ -26,7 +26,7 @@ def _get_user_id() -> str:
             return aad_user
     except AttributeError:
         pass
-    return "anonymous"
+    return f'user_{random.randint(1, 3)}'
 
 ### page layout
 st.set_page_config(
@@ -39,7 +39,6 @@ st.title("🤖 CC Financial Analyst")
 st.caption("Powered by Thoughtworks · last K turns remembered per session")
 
 ### Session setup
-user_id = f'user_{random.randint(1, 3)}'
 user_id = _get_user_id()
 if "session_id" not in st.session_state:
     st.session_state.session_id = user_id
