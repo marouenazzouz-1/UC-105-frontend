@@ -94,12 +94,12 @@ with st.sidebar:
         st.rerun()
  
     st.divider()
-    st.caption(
-        "**Azure Web App**: set `BACKEND_URL` and `FUNCTION_KEY` in "
-        "*Settings → Environment variables*.\n\n"
-        "**Local dev**: export them as shell env vars or add to "
-        "`.streamlit/secrets.toml`."
-    )
+    #st.caption(
+    #    "**Azure Web App**: set `BACKEND_URL` and `FUNCTION_KEY` in "
+    #    "*Settings → Environment variables*.\n\n"
+    #    "**Local dev**: export them as shell env vars or add to "
+    #    "`.streamlit/secrets.toml`."
+    #)
  
 # ── Chat display ──────────────────────────────────────────────────────────────
  
@@ -114,7 +114,6 @@ if prompt := st.chat_input("Type a message…"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
- 
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
             try:
@@ -122,7 +121,7 @@ if prompt := st.chat_input("Type a message…"):
                     f"{BACKEND_URL}/chat",
                     json={"session_id": session_id, "message": prompt},
                     headers=HEADERS,
-                    timeout=30,
+                    timeout=60,
                 )
                 resp.raise_for_status()
                 data = resp.json()
